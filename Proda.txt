@@ -1,0 +1,55 @@
+Общая информация о функционале проекта:
+1. Главный экран на котором можно будет увидеть краткую информацию о погоде на сегодня, время, список дел, нотсы,
+напоминания с их степенью важности и календарь.
+2. Страница на которой можно получить детальную информацию о погоде по месту проживания, посмотреть погоду в других
+местах, а также узнать детальный прогноз погоды на ближайшую неделю.
+3. Страница со списком дел.
+4. Страница на с заметками. Заметки в стиле Apple Notes, с возможностью создавать папки и перемещать заметки по ним.
+5. Страница с календарём. Имеется возможность создавать, изменять и удалять напоминания(как разовые, так и постоянные).
+
+Приложения:
+1. Главный экран - homescreen
+2. Погода - weather
+3. Список дел - todo
+4. Заметки - notes
+5. Календарь и напоминания - calendar
+6. Пользователи - users
+// 7. Файловая система - filestorage
+
+Модели в приложениях:
+----------------------------------------------------
+weather: None;
+----------------------------------------------------
+//////////////////////////
+filestorage:
+
+class File(models.Model):
+    title = models.CharField(max_length=255, verbose_name="Название")
+    content = models.FileField(upload_to=f'uploads/{user.pk}/')
+    time_uploaded = models.DateTimeField(auto_now_add=True)
+////////////////////////
+----------------------------------------------------
+notes:
+
+class NoteDirectory(models.Model):
+    #Сделать предупреждение о том, что папка не пуста, если это так и потребовать подтверждение удаления.
+    title = models.CharField(max_length=255, verbose_name="Название")
+    notes = models.ForeignKey('Note', on_delete=models.CASCADE)
+    owner = models.ForeignKey('users.User', on_delete=models.CASCADE)
+
+class Note(models.Model):
+    title = models.CharField(max_length=255, verbose_name="Название")
+    content = models.TextField(blank=True, verbose_name="Контент")
+    time_created = models.DateTimeField(auto_now_add=True)
+    time_updated = models.DateTimeField(auto_now=True)
+    owner = models.ForeignKey('User', on_delete=models.CASCADE) # нужен импорт from django.contrib.auth import User
+----------------------------------------------------
+users:
+Встроенный в Django класс User
+
+
+
+Детали о работе приложений:
+weather:
+При запросе берёт информацию по API соответствующего сайта и выдаёт информацию пользователю. Страницы с информацией по
+погоде в определённой локации кэшируются.
