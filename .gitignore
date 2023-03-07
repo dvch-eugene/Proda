@@ -1,2 +1,8 @@
 venv/
 .idea/
+Proda.txt
+.env
+Proda/homescreen/__pycache__/
+Proda/homescreen/migrations/
+Proda/Proda/__pycache__/
+db.sqlite3
