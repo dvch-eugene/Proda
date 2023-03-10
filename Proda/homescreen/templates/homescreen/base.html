@@ -3,20 +3,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{{service_title}}Proda</title>
+    <title>{{service_title}} Proda</title>
     <link rel="icon" href="{% static 'homescreen/imgs/icon.ico' %}" type="image/icon type">
     <link rel="stylesheet" type="text/css" href="{% static 'homescreen/css/base.css' %}">
     {%block additional_head%}{%endblock%}
     <!--Outsource Imports -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"/>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 </head>
 <body>
 <header>
     <a class="logo" href="{% url 'homescreen' %}">
         <img id="logo-img" src="{% static 'homescreen/imgs/logo-trans.png'%}" alt="">
         <p id="logo-text">Proda</p>
+        <p id="logo-service-title">{{service_title}}</p>
     </a>
     <div class="trans-header"></div>
     <div class="notifications">

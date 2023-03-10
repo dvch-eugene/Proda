@@ -1,0 +1,48 @@
+{% extends 'homescreen/base.html' %}
+{% load static %}
+
+{% block additional_head %}
+<link rel="stylesheet" href="{% static 'notes/css/notes.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="note-space">
+    <div class="directories">
+        {% for dir in directories %}
+        <a href="#">{{dir.title}}</a>
+        {% endfor %}
+    </div>
+    <div class="notes-list">
+        {% for note in notes %}
+        <div class="note-preview">
+            <a href="{% url 'notes' note.pk %}">{{note.title}}</a>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="note-field">
+        <div class="note-toolbar">
+            <button id="delete-note">
+                <a href="{% url 'note_delete' note_id=note_selected.pk %}">
+                    <span class="material-symbols-outlined">delete_sweep</span>
+                </a>
+            </button>
+            <button id="tune-note">
+                <span class="material-symbols-outlined">tune</span>
+            </button>
+            <button id="add-note">
+                <a href="{% url 'note_add' %}">
+                    <span class="material-symbols-outlined">open_in_new</span>
+                </a>
+            </button>
+        </div>
+        <div class="note-userspace">
+            <div class="note-title">
+                <h3>{{note_selected.title}}</h3>
+            </div>
+            <div class="note-content">
+                <p>{{note_selected.content}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

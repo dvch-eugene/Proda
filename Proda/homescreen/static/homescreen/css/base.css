@@ -39,6 +39,15 @@ header {
     font-size: 18px;
 }
 
+#logo-service-title {
+    font-family: 'Jetbrains Mono';
+    font-weight: 700;
+    font-size: 14px;
+    color: rgb(202, 188, 0);
+    margin-left: 60px;
+    margin-top: 4px;
+}
+
 
 .trans-header {
     position: absolute;

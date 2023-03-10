@@ -13,6 +13,7 @@ class HomeScreen(TemplateView):
         context['service_title'] = ''
 
         location = ''
+        
         ip = self.request.META.get('REMOTE_ADDR', None) 
         # won't work at localhost, 'cause gets localhost ip - 127.0.0.1
         if ip:
@@ -20,7 +21,7 @@ class HomeScreen(TemplateView):
         else:
             location = 'Minsk' # default city
 
-        weather = Weather(location)
+        weather = Weather('Minsk')
         weather.get_temperature(is_celsius=True)
         context['temperature'], context['temp_feels_like'] = weather.get_temperature()
         context['weather_country'], context['weather_city'] = weather.get_weather_location()

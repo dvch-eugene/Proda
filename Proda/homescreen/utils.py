@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 import os
 
 class Weather():
+    # Виджет погоды на главной странице
     def __init__(self, location=None):
         load_dotenv()
         self.celsius = 0
