@@ -29,7 +29,6 @@ class Weather():
         return self.weather['main']['humidity']
     
     def get_weather_description(self):
-        print("weather-main" + self.weather['weather'][0]['main'])
         return self.weather['weather'][0]['main']
     
     def get_wind(self):

@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
-from django.views.generic import TemplateView, ListView
-from geopy.geocoders import Nominatim
+from django.views.generic import TemplateView
 
 from .utils import *
+from notes.models import Note
 
 
 class HomeScreen(TemplateView):
@@ -19,7 +19,7 @@ class HomeScreen(TemplateView):
         if ip:
             location = requests.get(f'https://api.iplocation.net/?cmd=ip-country&ip={ip}').json()['country_name']
         else:
-            location = 'Minsk' # default city
+            pass # location = 'Minsk' # default city
 
         weather = Weather('Minsk')
         weather.get_temperature(is_celsius=True)
@@ -28,4 +28,7 @@ class HomeScreen(TemplateView):
         context['humidity'] = weather.get_humidity()
         context['weather_description'] = weather.get_weather_description()
         context['wind'] = weather.get_wind()
+
+        context['notes_left'] = Note.objects.filter(owner=self.request.user.pk).order_by('id')[:3]
+        context['notes_right'] = Note.objects.filter(owner=self.request.user.pk).order_by('id')[3:6]
         return context

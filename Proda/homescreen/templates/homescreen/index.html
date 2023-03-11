@@ -13,7 +13,7 @@
         <p id="time-counter"></p>
     </div>
 
-    <div class="weather">
+    <div class="weather-widget">
         <p id="location-country" >{{weather_country}}|</p>
         <p id="location-city">{{weather_city}}</p>
         <p id="weather-temp">{{temperature}}°</p>
@@ -24,6 +24,36 @@
             <span class="material-symbols-outlined">wind_power</span>
             {{wind}}m/s
         </p>
+    </div>
+
+    <div class="notes-widget">
+        <a id="note-widget-title" href="{% url 'note_home' %}">Notes</a>
+        <button id="add-note">
+            <a href="{% url 'note_add' %}"><span class="material-symbols-outlined">add</span></a>
+        </button>
+        <div class="notes-widget-list-space">
+            {% for note in notes_left %}
+            <a href="{% url 'notes' note.pk %}">
+                <div class="notes-widget-preview">
+                    <h2 class="note-widget-title">{{note.title}}</h2>
+                    <!-- <hr style="border: 1px solid rgba(122, 121, 151, 001); width:90%; margin-top: 5px; margin-left: 5%;"> -->
+                    <p class="note-widget-content">{{note.content}}</p>
+                </div> 
+            </a>
+        {% endfor %}
+        <div class="notes-widget-half-right">
+            {% for note in notes_right %}
+            <a href="{% url 'notes' note.pk %}">
+                <div class="notes-widget-preview">
+                    <h2 class="note-widget-title">{{note.title}}</h2>
+                    <!-- <hr style="border: 1px solid rgba(122, 121, 151, 001); width:90%; margin-top: 5px; margin-left: 5%;"> -->
+                    <p class="note-widget-content">{{note.content}}</p>
+                </div> 
+            </a>
+        {% endfor %}
+        </div>     
+        
+        </div>
     </div>
 </div>
 
