@@ -14,9 +14,19 @@
     </div>
     <div class="notes-list">
         {% for note in notes %}
-        <div class="note-preview">
-            <a href="{% url 'notes' note.pk %}">{{note.title}}</a>
-        </div>
+        {% if note == note_selected %}
+        <a href="{% url 'notes' note.pk %}">
+            <div class="note-preview-selected">
+                {{note.title}}
+            </div>
+        </a>
+        {% else %}
+        <a href="{% url 'notes' note.pk %}">
+            <div class="note-preview">
+                {{note.title}}
+            </div>
+        </a>
+        {% endif %}
         {% endfor %}
     </div>
     <div class="note-field">
@@ -26,9 +36,11 @@
                     <span class="material-symbols-outlined">delete_sweep</span>
                 </a>
             </button>
-            <button id="tune-note">
-                <span class="material-symbols-outlined">tune</span>
-            </button>
+            <!-- <button id="tune-note">
+                <a href="{% url 'note_edit' note_id=note_selected.pk %}">
+                    <span class="material-symbols-outlined">tune</span>
+                </a>
+            </button> -->
             <button id="add-note">
                 <a href="{% url 'note_add' %}">
                     <span class="material-symbols-outlined">open_in_new</span>
@@ -36,13 +48,19 @@
             </button>
         </div>
         <div class="note-userspace">
-            <div class="note-title">
-                <h3>{{note_selected.title}}</h3>
-            </div>
-            <div class="note-content">
-                <p>{{note_selected.content}}</p>
-            </div>
+            <form id="note-form" action="{% url 'note_edit' note_id=note_selected.pk %}" method="post">
+                {% csrf_token %}
+                <textarea id="note-title-field" type="text" name="title">{{ note_selected.title }}</textarea>
+                <textarea id="note-content-field" type="text" name="content">{{ note_selected.content }}</textarea>
+                <button type="submit">
+                    <span id="save-note" class="material-symbols-outlined">
+                        done
+                    </span>
+                </button>
+            </form>
         </div>
     </div>
 </div>
+
+<script src="{% static 'notes/js/notes.js'%}"></script>
 {% endblock %}

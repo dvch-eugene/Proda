@@ -21,7 +21,7 @@ class HomeScreen(TemplateView):
         else:
             pass # location = 'Minsk' # default city
 
-        weather = Weather('Minsk')
+        weather = Weather(location)
         weather.get_temperature(is_celsius=True)
         context['temperature'], context['temp_feels_like'] = weather.get_temperature()
         context['weather_country'], context['weather_city'] = weather.get_weather_location()
