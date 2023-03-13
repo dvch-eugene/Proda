@@ -10,3 +10,6 @@ class EditNoteForm(forms.Form):
         if len(title) >= 0:
             title += '\n'
             return title
+        
+class AddDirectoryForm(forms.Form):
+    title = forms.CharField(label='Title', max_length=50)

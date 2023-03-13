@@ -7,21 +7,37 @@
 
 {% block content %}
 <div class="note-space">
-    <div class="directories">
+    <div id="dir-list" class="directories">
         {% for dir in directories %}
-        <a href="#">{{dir.title}}</a>
+        {% if dir == dir_selected %}
+        <a class="dir-selected" href="">{{dir.title}}</a><br>
+        {% else %}
+        <a class="dir-list-a" href="{% url 'notes_dir' dir_id=dir.pk %}">{{dir.title}}</a><br>
+        {% endif %}
         {% endfor %}
+
+        <form id="add-dir-form" action="{% url 'add_directory' %}" method="post">
+            {% csrf_token %}
+            <input id="dir-title-field" type="text" name="title"></input>
+            <button id="add-dir-btn" type="submit">
+                <span class="material-symbols-outlined">
+                    done
+                </span>
+            </button>
+                
+            </button>
+        </form>
     </div>
     <div class="notes-list">
         {% for note in notes %}
         {% if note == note_selected %}
-        <a href="{% url 'notes' note.pk %}">
+        <a href="{% url 'notes_dir_w_note' dir_id=dir_id note_id=note.pk  %}">
             <div class="note-preview-selected">
                 {{note.title}}
             </div>
         </a>
         {% else %}
-        <a href="{% url 'notes' note.pk %}">
+        <a href="{% url 'notes_dir_w_note' dir_id=dir_id note_id=note.pk %}">
             <div class="note-preview">
                 {{note.title}}
             </div>
@@ -30,25 +46,9 @@
         {% endfor %}
     </div>
     <div class="note-field">
-        <div class="note-toolbar">
-            <button id="delete-note">
-                <a href="{% url 'note_delete' note_id=note_selected.pk %}">
-                    <span class="material-symbols-outlined">delete_sweep</span>
-                </a>
-            </button>
-            <!-- <button id="tune-note">
-                <a href="{% url 'note_edit' note_id=note_selected.pk %}">
-                    <span class="material-symbols-outlined">tune</span>
-                </a>
-            </button> -->
-            <button id="add-note">
-                <a href="{% url 'note_add' %}">
-                    <span class="material-symbols-outlined">open_in_new</span>
-                </a>
-            </button>
-        </div>
+        
         <div class="note-userspace">
-            <form id="note-form" action="{% url 'note_edit' note_id=note_selected.pk %}" method="post">
+            <form id="note-form" action="{% url 'note_edit' dir_id=dir_id note_id=note_selected.pk %}" method="post">
                 {% csrf_token %}
                 <textarea id="note-title-field" type="text" name="title">{{ note_selected.title }}</textarea>
                 <textarea id="note-content-field" type="text" name="content">{{ note_selected.content }}</textarea>
