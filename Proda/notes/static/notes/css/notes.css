@@ -1,4 +1,4 @@
-* {
+    * {
     margin: 0;
     padding: 0;
 }
@@ -52,6 +52,13 @@
     border: 2px solid;
     border-color: red;
     background-color: rgb(255, 246, 150);
+}
+
+.note-preview ,
+.note-preview-selected {
+    font-family: 'Jetbrains Mono';
+    font-size: 14px;
+    font-weight:500;
 }
 
 .note-field{

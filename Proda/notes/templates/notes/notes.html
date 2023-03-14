@@ -33,13 +33,13 @@
         {% if note == note_selected %}
         <a href="{% url 'notes_dir_w_note' dir_id=dir_id note_id=note.pk  %}">
             <div class="note-preview-selected">
-                {{note.title}}
+                <h2>{{note.title}}</h2>
             </div>
         </a>
         {% else %}
         <a href="{% url 'notes_dir_w_note' dir_id=dir_id note_id=note.pk %}">
             <div class="note-preview">
-                {{note.title}}
+                <h2>{{note.title}}</h2>
             </div>
         </a>
         {% endif %}

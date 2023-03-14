@@ -27,8 +27,10 @@ def add_dirrectory(request):
         form = AddDirectoryForm(request.POST)
         if form.is_valid():
             dir_title = form.cleaned_data['title']
-            NoteDirectory.objects.create(title=dir_title, owner=request.user)
-    return HttpResponseRedirect(reverse('note_home'))
+            dir = NoteDirectory.objects.create(title=dir_title, owner=request.user)
+            note = Note.objects.create(title='', owner=request.user, directory=dir)
+
+    return HttpResponseRedirect(reverse('notes_dir', args=[dir.pk]))
 
 
 class NoteDirectoriesView(DataMixin, ListView):
