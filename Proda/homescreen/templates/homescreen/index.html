@@ -29,7 +29,7 @@
     <div class="notes-widget">
         <a id="note-widget-title" href="{% url 'note_home' %}">Notes</a>
         <button id="add-note">
-            <a href="{% url 'note_add' %}"><span class="material-symbols-outlined">add</span></a>
+            <a href="{% url 'note_add' dir_id=notes_left.first.directory.pk %}"><span class="material-symbols-outlined">add</span></a>
         </button>
         <div class="notes-widget-list-space">
             {% for note in notes_left %}

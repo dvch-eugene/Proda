@@ -73,8 +73,8 @@
         <div class="note-userspace">
             <form id="note-form" action="{% url 'note_edit' dir_id=dir_id note_id=note_selected.pk %}" method="post">
                 {% csrf_token %}
-                <textarea id="note-title-field" type="text" name="title">{{ note_selected.title }}</textarea>
-                <textarea id="note-content-field" type="text" name="content">{{ note_selected.content }}</textarea>
+                <textarea spellcheck="false" id="note-title-field" type="text" name="title">{{ note_selected.title }}</textarea>
+                <textarea spellcheck="false" id="note-content-field" type="text" name="content">{{ note_selected.content }}</textarea>
                 <button type="submit" data-tooltip="Save note">
                     <span id="save-note"  class="material-symbols-outlined">
                         done

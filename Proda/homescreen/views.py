@@ -27,5 +27,4 @@ class HomeScreen(DataMixin, TemplateView):
 
         context['notes_left'] = Note.objects.filter(owner=self.request.user.pk).order_by('id')[:3]
         context['notes_right'] = Note.objects.filter(owner=self.request.user.pk).order_by('id')[3:6]
-        
         return dict(list(context.items())+list(c_def.items()))
