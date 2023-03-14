@@ -3,6 +3,8 @@ from django.conf import settings
 
 
 class Note(models.Model):
+    """Модель заметки"""
+    
     title = models.CharField(max_length=255, verbose_name="Заголовок")
     content = models.TextField(blank=True, verbose_name="Контент")
     time_created = models.DateTimeField(auto_now_add=True)
@@ -20,6 +22,8 @@ class Note(models.Model):
 
 
 class NoteDirectory(models.Model):
+    """Модель дирректории(папки), которая хранит в себе заметки"""
+
     #TODO:Сделать предупреждение о том, что папка не пуста, если это так и потребовать подтверждение удаления.
     title = models.CharField(max_length=255, verbose_name="Название")
     notes = models.ForeignKey('Note', on_delete=models.CASCADE, null=True)

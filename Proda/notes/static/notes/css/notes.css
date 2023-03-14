@@ -18,13 +18,16 @@
     border-color: green;
 }
 
-
+.dir-in-list {
+    height: 50px;
+    border: 1px solid red;
+}
 
 .dir-list-a{
     font-family: 'Jetbrains Mono';
     font-size: 20px;
     font-weight:500;
-    border: 1px solid red;
+
 }
 
 .dir-selected {
@@ -39,6 +42,7 @@
     left: 15%;
     width: 25%;
     height: 95.3vh;
+    overflow-y: scroll;
 }
 
 .note-preview {
@@ -85,14 +89,14 @@
 
 #add-note {
     position: absolute;
-    top: 8px;
+    top: 7px;
 
 }
 
 #save-note {
     position: absolute;
-    top: -4.5%;
-    right: 10px;
+    top: -3.5%;
+    right: 15px;
 }
 
 .note-userspace {
@@ -107,8 +111,11 @@ button {
 }
 
 #note-form {
-    width: 100%;
-    height: 100%;
+    position: absolute;
+    right: 0;
+    top: 40px;
+    width: 60%;
+    height: 91.5vh;
 }
 
 textarea{

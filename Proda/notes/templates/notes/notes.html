@@ -10,9 +10,17 @@
     <div id="dir-list" class="directories">
         {% for dir in directories %}
         {% if dir == dir_selected %}
-        <a class="dir-selected" href="">{{dir.title}}</a><br>
+        <div class="dir-in-list">
+            <p class="dir-selected">{{dir.title}}</p>
+        </div>
+        
         {% else %}
-        <a class="dir-list-a" href="{% url 'notes_dir' dir_id=dir.pk %}">{{dir.title}}</a><br>
+        <a href="{% url 'notes_dir' dir_id=dir.pk %}">
+            <div class="dir-in-list">
+                <p class="dir-list-a">{{dir.title}}</p>
+            </div>
+        </a>
+        
         {% endif %}
         {% endfor %}
 
@@ -46,14 +54,29 @@
         {% endfor %}
     </div>
     <div class="note-field">
-        
+        <div class="note-toolbar">
+            <button id="delete-note" data-tooltip="Delete note">
+                <a href="{% url 'note_delete' dir_id=dir_id note_id=note_selected.pk %}">
+                    <span class="material-symbols-outlined">delete_sweep</span>
+                </a>
+            </button>
+            <!-- <button id="tune-note">
+                <span class="material-symbols-outlined">tune</span>
+            </button> -->
+            <button id="add-note" data-tooltip="Create new note">
+                <a href="{% url 'note_add' dir_id=dir_id%}">
+                    <span class="material-symbols-outlined">open_in_new</span>
+                </a>
+            </button>
+        </div>
+    </div>
         <div class="note-userspace">
             <form id="note-form" action="{% url 'note_edit' dir_id=dir_id note_id=note_selected.pk %}" method="post">
                 {% csrf_token %}
                 <textarea id="note-title-field" type="text" name="title">{{ note_selected.title }}</textarea>
                 <textarea id="note-content-field" type="text" name="content">{{ note_selected.content }}</textarea>
-                <button type="submit">
-                    <span id="save-note" class="material-symbols-outlined">
+                <button type="submit" data-tooltip="Save note">
+                    <span id="save-note"  class="material-symbols-outlined">
                         done
                     </span>
                 </button>
